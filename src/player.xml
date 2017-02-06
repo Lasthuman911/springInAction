@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--case 1：基本裝配-->
+
+    <!--    &lt;!&ndash;若無具體ID，則默認為springinaction.soundsystem.SgtPeppers#0，下一個SgtPeppers為#1 &ndash;&gt;
+        <bean class="springinaction.soundsystem.SgtPeppers">-->
+
+    <!-- 基於xml配置，若類名改變，則相關的配置文件也需要手動更新，基於java Config則不需要，便於重構
+     用javaConfig創建bean更加靈活，添加條件等等-->
+
+    <!--<bean id="compactDisc" class="springinaction.soundsystem.SgtPeppers"></bean>-->
+
+    <!--case 2 ：構造函數引用裝配-->
+
+    <!-- 若有多個參數，重複constructor-arg ref=-->
+    <!--    <bean id="cdPlayer" class="springinaction.soundsystem.auto.CDPlayer">
+            <constructor-arg ref="compactDisc"/>
+        </bean>-->
+
+    <!--替代方案 1 cd:構造的參數名-->
+    <!--   <bean id="cdPlayer" class="springinaction.soundsystem.auto.CDPlayer"
+       c:cd-ref="compactDisc"/> -->
+
+    <!--替代方案 2    _0 ：參數的位置-->
+    <bean id="cdPlayer" class="springinaction.soundsystem.auto.CDPlayer"
+    c:_0-ref="compactDisc"/>
+
+    <!-- case 3 :構造函數裝配字面值--><!---->
+    <!-- _c 暫時無法進行集合的裝配-->
+    <bean id="compactDisc" class="springinaction.soundsystem.BlankDisk">
+        <constructor-arg value="hhhhhhhhhh"/>
+        <constructor-arg value="wzm"/>
+        <!--<constructor-arg><null/></constructor-arg>-->
+        <constructor-arg>
+            <list><!--若是set 直接修改為set -->
+                <value>1</value><!--若是引用則直接用 ref bean=“” -->
+                <value>2</value>
+                <value>3</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+<!--    <bean id="compactDisc" class="springinaction.soundsystem.BlankDisk"
+    c:_0="hhhhhhhhhh"
+    c:_1="wzm"/>-->
+
+<!--    <bean id="compactDisc" class="springinaction.soundsystem.BlankDisk"
+          c:artist="hhhhhhhhhh"
+          c:title="wzm"/>-->
+
+</beans>
