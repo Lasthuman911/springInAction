@@ -9,10 +9,11 @@ import springinaction.soundsystem.CompactDisc;
  */
 @Component
 public class CDPlayer implements MediaPlayer {
-/*    @Autowired
-    public void setCd(CompactDisc cd) {
-        this.cd = cd;
-    }*/
+
+ /*       @Autowired
+        public void setCd(CompactDisc cd) {
+            this.cd = cd;
+        }*/
 /*    @Autowired//作用于普通方法上一样可以实现自动装配
     public void insertDisc(CompactDisc cd){
         this.cd = cd;

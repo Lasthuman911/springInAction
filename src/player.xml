@@ -11,7 +11,7 @@
     <!-- 基於xml配置，若類名改變，則相關的配置文件也需要手動更新，基於java Config則不需要，便於重構
      用javaConfig創建bean更加靈活，添加條件等等-->
 
-    <!--<bean id="compactDisc" class="springinaction.soundsystem.SgtPeppers"></bean>-->
+    <bean id="compactDisc" class="springinaction.soundsystem.SgtPeppers"></bean>
 
     <!--case 2 ：構造函數引用裝配-->
 
@@ -26,22 +26,25 @@
 
     <!--替代方案 2    _0 ：參數的位置-->
     <bean id="cdPlayer" class="springinaction.soundsystem.auto.CDPlayer"
-    c:_0-ref="compactDisc"/>
+          c:_0-ref="compactDisc"/>
+     <!--   <property name="cd" ref="compactDisc"></property>
+    </bean>-->
+    <!--c:_0-ref="compactDisc"/>-->
 
-    <!-- case 3 :構造函數裝配字面值--><!---->
-    <!-- _c 暫時無法進行集合的裝配-->
+<!--    &lt;!&ndash; case 3 :構造函數裝配字面值&ndash;&gt;&lt;!&ndash;&ndash;&gt;
+    &lt;!&ndash; _c 暫時無法進行集合的裝配&ndash;&gt;
     <bean id="compactDisc" class="springinaction.soundsystem.BlankDisk">
         <constructor-arg value="hhhhhhhhhh"/>
         <constructor-arg value="wzm"/>
-        <!--<constructor-arg><null/></constructor-arg>-->
+        &lt;!&ndash;<constructor-arg><null/></constructor-arg>&ndash;&gt;
         <constructor-arg>
-            <list><!--若是set 直接修改為set -->
-                <value>1</value><!--若是引用則直接用 ref bean=“” -->
+            <list>&lt;!&ndash;若是set 直接修改為set &ndash;&gt;
+                <value>1</value>&lt;!&ndash;若是引用則直接用 ref bean=“” &ndash;&gt;
                 <value>2</value>
                 <value>3</value>
             </list>
         </constructor-arg>
-    </bean>
+    </bean>-->
 
 <!--    <bean id="compactDisc" class="springinaction.soundsystem.BlankDisk"
     c:_0="hhhhhhhhhh"
