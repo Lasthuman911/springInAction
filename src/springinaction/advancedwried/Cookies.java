@@ -1,7 +1,7 @@
 package springinaction.advancedwried;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+        import org.springframework.beans.factory.annotation.Qualifier;
+        import org.springframework.stereotype.Component;
 
 /**
  * Created by admin on 2017/2/7.
