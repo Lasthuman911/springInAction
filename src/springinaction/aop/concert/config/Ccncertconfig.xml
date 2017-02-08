@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="springinaction.aop.concert"/>
+
+    <!--启用AspectJ自动代理-->
+    <aop:aspectj-autoproxy/>
+
+    <bean class="springinaction.aop.concert.Audience"/>
+    <aop:config>
+        <aop:aspect ref="audience">
+            <!--case 1 -->
+            <!-- <aop:before pointcut="execution(* springinaction.aop.concert.Persormance.perform(..))" method="silenceCellPhones"/>
+             <aop:before pointcut="execution(* springinaction.aop.concert.Persormance.perform(..))" method="seat"/>
+             <aop:after-returning pointcut="execution(* springinaction.aop.concert.Persormance.perform(..))" method="applause"/>
+             <aop:after-throwing pointcut="execution(* springinaction.aop.concert.Persormance.perform(..))" method="demandRefund"/>-->
+
+            <!--case 2 ：case1 的改进-->
+            <!--<aop:pointcut id="performance" expression="execution(* springinaction.aop.concert.Persormance.perform(..))"/>
+
+            <aop:before pointcut-ref="performance" method="silenceCellPhones"/>
+            <aop:before pointcut-ref="performance" method="seat"/>
+            <aop:after-returning pointcut-ref="performance" method="applause"/>
+            <aop:after-throwing pointcut-ref="performance" method="demandRefund"/>-->
+
+            <!--case 3 :定义环绕通知-->
+            <aop:pointcut id="performance"
+                          expression="execution(* springinaction.aop.concert.Persormance.perform(..))"/>
+
+            <aop:around pointcut-ref="performance" method="watchePerformacnce"/>
+
+            <!--case 4 :注入新功能-->
+            <aop:declare-parents types-matching="springinaction.aop.concert.Persormance+"
+                                 implement-interface="springinaction.aop.concert.Encoreable"
+                                 default-impl="springinaction.aop.concert.DefaultEncoreable"
+            />
+
+        </aop:aspect>
+    </aop:config>
+
+    <!--case 5 : 注入aspectJ-->
+    <bean id="criticismEngine" class="springinaction.aop.concert.CriticismEngineImpl">
+        <property name="criticismPool">
+            <list>
+                <value>1</value>
+                <value>dkjfkasjdf</value>
+                <value>gogoggogogogo</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="springinaction.aop.concert.CriticAspect"
+          factory-method="aspectOf">
+        <property name="criticismEngine" ref="criticismEngine" />
+    </bean>
+
+</beans>
