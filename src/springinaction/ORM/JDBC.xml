@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--case 2：基于JDBC驱动的数据源-->
+    <!--
+        SingleConnectionDataSource有且只有一个数据库连接， 所以不适合用于多线程的应用程序， 最好只在测试的时候使用
+        DriverManagerDataSource和SimpleDriverDataSource尽管支持多线程， 但是在每次请求连接的时候都会创建新连接,这是以性能为代价的
+    -->
+    <bean id="dataSource1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+
+        <property name="url" value="dbc:oracle:thin:@10.16.111.245:1521:testdb1"/>
+
+        <property name="username" value="TRULYMESTST"/>
+        <property name="password" value="trulymestst"/>
+
+    </bean>
+</beans>

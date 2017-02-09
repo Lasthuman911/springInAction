@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc
+http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+http://www.springframework.org/schema/jee
+http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <beans profile="development">
+        <jdbc:embeddeddatabase id="dataSource" type="H2">
+            <jdbc:script location="com/hab
+uma/spitter/db/jdbc/schema.sql"/>
+            <jdbc:script location="com/habum
+a/spitter/db/jdbc/test-data.sql"/>
+        </jdbc:embeddeddatabase>
+    </beans>
+
+    <beans profile="qa">
+<!--        <bean id="dataSource"
+              class="org.apache.commons.dbcp.BasicDataSource"
+              p:driverClassName="org.h2.Driver"
+              p:url="jdbc:h2:tcp://localhost/~/spitter"
+              p:username="sa"
+              p:password=""
+              p:initialSize="5"
+              p:maxActive="10"/>-->
+        <!--case1:使用数据源连接池-->
+        <bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource">
+
+            <!--指定JDBC驱动类，全限定类名-->
+            <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+
+            <!--指定JDBC URL-->
+            <property name="url" value="dbc:oracle:thin:@10.16.111.245:1521:testdb1"/>
+
+            <property name="username" value="TRULYMESTST"/>
+            <property name="password" value="trulymestst"/>
+
+            <!--同一时间可以从池中分配的最多连接数，0表示无限制-->
+            <property name="maxActive" value="10"/>
+
+            <!--池启动时创建的连接数量-->
+            <property name="initialSize" value="5"/>
+
+            <!--池里不会释放的最多空闲连接数，0表示无限制-->
+            <property name="maxIdle" value="-1"/>
+
+            <!--在不创建新连接的情况下，池中保持空闲的最小连接数-->
+            <property name="minIdle" value="2"/>
+
+            <!--在抛出异常之前，池等待连接回收的最大时间（当无可用连接时），-1表示无限等待-->
+            <property name="maxWait" value="5000"/>
+
+            <property name="validationQuery" value="select 1 from dual"/>
+            <property name="testOnBorrow" value="true"/>
+            <property name="minEvictableIdleTimeMillis" value="30000"/>
+            <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+
+        </bean>
+
+
+    </beans>
+
+    <beans profile="production">
+        <jee:jndi-lookup id="dataSource2"
+                         jndi-name="/jdbc/SpitterDS"
+                         resource-ref="true"/>
+    </beans>
+</beans>
