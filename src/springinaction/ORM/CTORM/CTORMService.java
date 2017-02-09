@@ -5,6 +5,6 @@ package springinaction.ORM.CTORM;
  */
 public class CTORMService<DATA> {
     public void insert(DATA dataInfo){
-
+        String tableName = CTORMUtil.getTableNameByClassName(dataInfo.getClass());
     }
 }
