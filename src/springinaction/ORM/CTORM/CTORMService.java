@@ -2,6 +2,7 @@ package springinaction.ORM.CTORM;
 
 import springinaction.ORM.common.CommonUtil;
 import springinaction.ORM.exception.ErrorSignal;
+import springinaction.ORM.exception.nanoFrameDBErrorSignal;
 import springinaction.ORM.generic.validation.GenericServiceProxy;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public class CTORMService<DATA> {
         keySet.addAll(binSet);
         param = CommonUtil.toStringFromCollection(binSet.toArray());
 
-        int result = GenericServiceProxy.getSqlMesTemplate().update();
+        int result = GenericServiceProxy.getSqlMesTemplate().update(sql, keySet.toArray());
+
+        if (result == 0)
+            throw new nanoFrameDBErrorSignal(ErrorSignal.InvalidQueryState,param,SQLLogUtil.getLogFormatSqlStatement(sql, param, CTORMUtil.getLogger()));
     }
 }
