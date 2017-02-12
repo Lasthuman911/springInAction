@@ -8,6 +8,7 @@
       <root url="jar://D:/jar/system-rules-1.16.1.jar!/" />
       <root url="jar://D:/jar/aspectj-1.8.10.jar!/" />
       <root url="jar://D:/jar/aspectjweaver.jar!/" />
+      <root url="jar://D:/jar/nanoframe.dependency.apache.commons-1.1.0.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://D:/jar/aspectj-1.8.10.jar!/doc/aspectj5rt-api" />

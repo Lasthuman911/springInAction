@@ -16,6 +16,13 @@ public class nanoFrameErrorSignal extends RuntimeException {
         log.info(super.getMessage());
     }
 
+    public nanoFrameErrorSignal(String errorCode, String msg, Throwable throwable)
+    {
+        super(makeMessage(errorCode, msg), throwable);
+        this.errorCode = errorCode;
+        log.info(super.getMessage());
+    }
+
     public static String makeMessage(String errorCode,String msg){
         return String.format("%s: %s",errorCode,msg);
     }
