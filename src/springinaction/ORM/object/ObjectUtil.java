@@ -2,6 +2,7 @@ package springinaction.ORM.object;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import springinaction.ORM.standard.KeyInfo;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -50,7 +51,7 @@ public class ObjectUtil {
         return fieldName;
     }
 
-    private static Map<String, String> getUdfsValue(Object dataInfo) {
+    public static Map<String, String> getUdfsValue(Object dataInfo) {
 
         try {
             Method method = dataInfo.getClass().getMethod("getUdfs");
@@ -65,25 +66,46 @@ public class ObjectUtil {
     }
 
     public static String getString(Object[] bindSet) {
-        if (bindSet == null || bindSet.length ==0)
+        if (bindSet == null || bindSet.length == 0)
             return "";
         StringBuilder str = new StringBuilder();
-        for (int i=0;i<bindSet.length;i++){
+        for (int i = 0; i < bindSet.length; i++) {
             str.append(bindSet[i]).append(",");
         }
-        return str.delete(str.length()-1,str.length()).toString();
+        return str.delete(str.length() - 1, str.length()).toString();
     }
 
-    public static void setFieldValue(Object object,String fieldName ,Object value){
+    public static String getString(KeyInfo keyInfo) {
+        if (keyInfo == null)
+            return "";
+        StringBuilder strBuilder = new StringBuilder();
+        try {
+             Class c = Class.forName(keyInfo.getClass().getName());
+            Method[] methods = c.getMethods();
+            for (int i = 0;i < methods.length;i++){
+                if (methods[i].getName().startsWith("get")&&!methods[i].getName().equalsIgnoreCase("getclass")){
+                    strBuilder.append(methods[i].getName().substring(3,methods[i].getName().length())).append(":")
+                            .append(methods[i].invoke(keyInfo,null).toString());
+                    strBuilder.append(",");
+                }
+                strBuilder.setLength(strBuilder.length()-1);
+            }
+        }catch (Exception e){
+            log.warn(e);
+        }
+        return strBuilder.toString();
+    }
+
+    public static void setFieldValue(Object object, String fieldName, Object value) {
         try {
             if (fieldName.equals("udfs"))
-                setUdfsValue(object,(Map<String,String>)value);
+                setUdfsValue(object, (Map<String, String>) value);
             else {
                 try {
                     Field field = object.getClass().getDeclaredField(fieldName);
                     field.setAccessible(true);
-                    copyFieldValue(field,object,value);
-                }catch (NoSuchFieldException e){
+                    copyFieldValue(field, object, value);
+                } catch (NoSuchFieldException e) {
 
                     fieldName = getChangeField(fieldName);
                     Field field = object.getClass().getDeclaredField(fieldName);
@@ -92,12 +114,12 @@ public class ObjectUtil {
                 }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
 
-    public static void setUdfsValue(Object dataInfo,Map<String ,String > value) {
+    public static void setUdfsValue(Object dataInfo, Map<String, String> value) {
         try {
             Method method = dataInfo.getClass().getMethod("setUdfs", Map.class);
             method.invoke(dataInfo, value);
@@ -109,36 +131,31 @@ public class ObjectUtil {
         }
     }
 
-    public static void copyFieldValue(Field field, Object target, Object value)
-    {
-        try
-        {
+    public static void copyFieldValue(Field field, Object target, Object value) {
+        try {
             Class type = field.getType();
 
-            if ( type.equals( Double.class ) || type.equals( double.class ))
+            if (type.equals(Double.class) || type.equals(double.class))
                 field.set(target, Double.parseDouble(String.valueOf(value)));
-            else if ( type.equals( Long.class ) || type.equals( long.class ))
+            else if (type.equals(Long.class) || type.equals(long.class))
                 field.set(target, Long.parseLong(String.valueOf(value)));
-            else if ( type.equals( Integer.class ) || type.equals( int.class ))
+            else if (type.equals(Integer.class) || type.equals(int.class))
                 field.set(target, Integer.parseInt(String.valueOf(value)));
-            else if ( type.equals( Float.class ) || type.equals( float.class ))
+            else if (type.equals(Float.class) || type.equals(float.class))
                 field.set(target, Float.parseFloat(String.valueOf(value)));
-            else if ( type.equals( Short.class ) || type.equals( short.class ))
-                field.set(target, Short.parseShort(String.valueOf(value )));
-            else if ( type.equals( Boolean.class ) || type.equals( boolean.class ))
+            else if (type.equals(Short.class) || type.equals(short.class))
+                field.set(target, Short.parseShort(String.valueOf(value)));
+            else if (type.equals(Boolean.class) || type.equals(boolean.class))
                 field.set(target, Boolean.parseBoolean(String.valueOf(value)));
-            else
-            {
-                if (field.getName().equalsIgnoreCase("key"))
-                {
+            else {
+                if (field.getName().equalsIgnoreCase("key")) {
                     if (ObjectUtil.getFieldValue(target, "key") != null
                             && !ObjectUtil.getFieldValue(target, "key").getClass().equals(value.getClass()))
                         return;
                 }
                 field.set(target, value);
             }
-        } catch (Throwable e)
-        {
+        } catch (Throwable e) {
             if (log.isDebugEnabled())
 
                 log.warn(e, e);
@@ -146,5 +163,24 @@ public class ObjectUtil {
                 log.warn(e);
         }
 
+    }
+
+    public static boolean isNullOrNullString(Object object) {
+        try {
+            Field[] fields = object.getClass().getDeclaredFields();
+
+            for (int i = 0; i < fields.length; i++) {
+                fields[i].setAccessible(true);
+                if (fields[i].get(object) == null)
+                    return true;
+                else if (fields[i].get(object) instanceof String) {
+                    if (fields[i].get(object).toString().length() == 0)
+                        return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

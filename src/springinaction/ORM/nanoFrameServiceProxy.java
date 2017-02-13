@@ -6,6 +6,7 @@ import org.osgi.framework.BundleContext;
 import springinaction.ORM.common.BundleUtil;
 import springinaction.ORM.exception.ErrorSignal;
 import springinaction.ORM.exception.nanoFrameErrorSignal;
+import springinaction.ORM.standard.info.ObjectAttributeMap;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,5 +46,14 @@ public class nanoFrameServiceProxy {
         }
         else
             return bundleContext;
+    }
+
+    public static ObjectAttributeMap getObjectAttributeMap() {
+        return (ObjectAttributeMap) BundleUtil.waitForService(ObjectAttributeMap.class.getName());
+    }
+
+    public static SqlTemplate getSqlTemplate()
+    {
+        return (SqlTemplate) BundleUtil.waitForService(SqlTemplate.class.getName());
     }
 }

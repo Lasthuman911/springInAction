@@ -18,10 +18,10 @@ public class CTORMService<DATA> {
         List<Object> keySet = CTORMUtil.makeKeyParam(dataInfo);
 
         String param = CommonUtil.toStringFromCollection(keySet.toArray());
-        //TODO
-     /*   if (!CTORMUtil.validateKeyParam(dataInfo,keySet.toArray()).isEmpty())
+
+        if (!CTORMUtil.validateKeyParam(dataInfo,keySet.toArray()).isEmpty())
             throw new nanoFrameDBErrorSignal(ErrorSignal.NullPointKeySignal, param,
-                    SQLLogUtil.getLogFormatSqlStatement(sql, param, CTORMUtil.getLogger()));*/
+                    SQLLogUtil.getLogFormatSqlStatement(sql, param, CTORMUtil.getLogger()));
         List<Object> binSet = CTORMUtil.makeNonkeyParam(dataInfo);
         keySet.addAll(binSet);
         param = CommonUtil.toStringFromCollection(binSet.toArray());

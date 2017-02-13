@@ -23,6 +23,13 @@ public class nanoFrameDBErrorSignal extends nanoFrameErrorSignal {
         this.sql = sql;
     }
 
+    public nanoFrameDBErrorSignal(String errorCode, String dataKey, String sql, String msg)
+    {
+        super(errorCode, String.format("%s [DataKey=%s] [Sql=%s]", msg, dataKey, sql));
+        this.dataKey = dataKey;
+        this.sql = sql;
+    }
+
     public nanoFrameDBErrorSignal(String errorCode, String sql, Throwable throwable)
     {
         super(errorCode, String.format("%s [Sql=%s]", throwable.getMessage(), sql), throwable);

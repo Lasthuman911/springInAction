@@ -8,14 +8,18 @@ import java.sql.SQLException;
 /**
  * Created by admin on 2017/2/10.
  */
-public class ErrorSignal {
-    public final static String	NotActive						= "NotActive";
+public class ErrorSignal
+{
+    public final static String NotActive = "NotActive";
     public final static String NullPointKeySignal = "NullPointKeySignal";
-    public final static String	NoDefineServiceBean				= "NoDefineServiceBean";
-    public static final String	DataAccessException				= "DataAccessException";
-    public final static String	DuplicateNameSignal				= "DuplicateNameSignal";
-    public final static String	InvalidQueryState				= "InvalidQueryState";
-    public final static String	NotFoundSignal					= "NotFoundSignal";
+    public final static String NoDefineServiceBean = "NoDefineServiceBean";
+    public static final String DataAccessException = "DataAccessException";
+    public final static String DuplicateNameSignal = "DuplicateNameSignal";
+    public final static String InvalidQueryState = "InvalidQueryState";
+    public final static String NotFoundSignal = "NotFoundSignal";
+    public final static String NoServiceRegistered = "NoServiceRegistered";
+    public final static String NotDefineObjectAttributeSignal = "NotDefineObjectAttributeSignal";
+    public final static String InvalidQueryType = "InvalidQueryType";
 
     public static nanoFrameDBErrorSignal getNotifyException(DataAccessException e, String bindSet, String sql)
     {

@@ -3,10 +3,12 @@ package springinaction.ORM.CTORM;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import springinaction.ORM.StringComparator;
+import springinaction.ORM.standard.DataInfo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -59,4 +61,16 @@ public class SQLLogUtil {
         return null;
     }
 
+    public static void logAfterQuery(List result, Log log)
+    {
+        if (log.isDebugEnabled())
+        {
+            if (result instanceof List)
+                log.debug("SQL query returned " + ((List) result).size() + " rows");
+            else if (result instanceof DataInfo)
+                log.debug("SQL query returned 1 rows");
+            else
+                log.debug("SQL query returned "+result);
+        }
+    }
 }
