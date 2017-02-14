@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="nanoframe.kernel-1.1.0">
+    <CLASSES>
+      <root url="jar://D:/jar/nanoframe.kernel-1.1.0.jar!/" />
+      <root url="jar://D:/jar/nanoTrack.Durable.Service-1.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://D:/jar/nanoframe.kernel-1.1.0.jar!/" />
+      <root url="jar://D:/jar/nanoTrack.Durable.Service-1.1.0.jar!/" />
+    </SOURCES>
+  </library>
+</component>

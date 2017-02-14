@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.model.Idurable.IdurableOperation">
+    <select id="selectDurableByDurableName" parameterType="String" resultType="Durable">
+    select * from durable where durablename = #{durablename}
+</select>
+
+    <resultMap id="resultListDurable" type="Durable">
+        <id column="durableSpecName" property="durableSpecName"/>
+        <result column="durableType" property="durableType"/>
+        <result column="timeUsedLimit" property="timeUsedLimit"/>
+    </resultMap>
+
+    <select id="selectDurables" parameterType="String" resultMap="resultListDurable">
+        select * from durable where durablename like #{durablename}
+    </select>
+
+    <insert id="addDurable" parameterType="Durable" useGeneratedKeys="true" keyProperty="DurableKey">
+        INSERT INTO DURABLE(DURABLENAME,AREANAME) VALUES(#{durableName},#{areaName})
+    </insert>
+
+    <update id="updateDurable" parameterType="Durable">
+        update durable set areaName = #{areaName} where durableName=#{durableName}
+    </update>
+
+    <delete id="deleteDurable" parameterType="String">
+        delete from durable where durableName = #{durableName}
+    </delete>
+
+
+
+</mapper>
+
