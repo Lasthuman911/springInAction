@@ -21,5 +21,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
                 Durable durable = mapper.selectDurableByDurableName("LLList");
 
                 System.out.println(durable.getDurableType());
+
     }
 }
