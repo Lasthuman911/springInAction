@@ -19,8 +19,11 @@
       <root url="file://D:/jar/libs" />
       <root url="jar://D:/jar/aspectj-1.8.10.jar!/doc/examples" />
       <root url="jar://D:/jar/aspectj-1.8.10.jar!/doc/examples/ltw" />
+      <root url="file://D:/MIT/OpenSource/JDK1.7" />
+      <root url="file://D:/MIT/OpenSource/JDK1.7" />
     </SOURCES>
     <jarDirectory url="file://D:/jar/libs" recursive="false" />
     <jarDirectory url="file://D:/jar/libs" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://D:/MIT/OpenSource/JDK1.7" recursive="false" type="SOURCES" />
   </library>
 </component>

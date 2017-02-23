@@ -33,7 +33,6 @@
          as some drivers deny compatibility but still work &ndash;&gt;
         <setting name="useGeneratedKeys" value="true"/>
     </settings>-->
-
     <!-- Continue going here -->
 
 </configuration>
