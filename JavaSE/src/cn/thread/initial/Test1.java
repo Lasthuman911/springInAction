@@ -1,4 +1,4 @@
-package cn.thread.initial.p1;
+package cn.thread.initial;
 
 /**
  * Name: admin
@@ -33,7 +33,7 @@ public class Test1 extends Thread {
 
         //执行start方法并不表示里面执行，只是表示它处于可执行状态
         thread0.start();
-        // thread0.start();
+        // thread0.start();//IllegalThreadStateException,只能对处于new状态的线程执行start方法
         thread1.start();
     }
 }
