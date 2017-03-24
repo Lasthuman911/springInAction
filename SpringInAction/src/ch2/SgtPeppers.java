@@ -4,7 +4,8 @@ package ch2; /**
 import org.springframework.stereotype.Component;
 
 
-@Component//表示此类为组件类，不需要显示的配置
+//@Component//表示此类为组件类，不需要显示的配置,默认bean的名称为sgtPeppers
+@Component("lonelyHeartsClud")//指定bean的名称
 public class SgtPeppers implements CompactDisc
 {
     private String title = "sgt.title";

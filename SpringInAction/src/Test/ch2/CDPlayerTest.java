@@ -17,10 +17,10 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(classes = CDPlayerConfig.class)
 public class CDPlayerTest {
     @Autowired
-    private CompactDisc cd;
+    private CompactDisc cd;//初始化的时候是null
 
     @Test
     public void cdShouldNotBeNull(){
-        assertNotNull(cd);
+        assertNotNull(cd);//若测试通过，表示成功的在spring上下文中创建了bean
     }
 }
