@@ -10,9 +10,10 @@ public class SgtPeppers implements CompactDisc
 {
     private String title = "sgt.title";
     private String artist = "sgt.artist";
-    public void play()
+    public String play()
     {
         System.out.println("Playing"+title+" by "+artist);
         //注意这里若使用println，则输出是带有下一行的
+        return ("Playing "+title+" by "+artist);
     }
 }

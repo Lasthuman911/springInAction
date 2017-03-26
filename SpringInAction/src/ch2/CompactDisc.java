@@ -6,5 +6,5 @@ package ch2;
  * Time: 17:09
  */
 public interface CompactDisc {
-    void play();
+    String play();
 }

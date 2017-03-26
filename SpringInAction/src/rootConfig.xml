@@ -1,9 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c = "http://www.springframework.org/schema/c"
+       xmlns:p = "http://www.springframework.org/schema/p"
+       xmlns:util = "http://www.springframework.org/schema/util"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!--在根配置文件中启用组件扫描-->
     <context:component-scan base-package="ch2"/>
+
+    <!--声明一个简单的bean，相当于Config中的@Bean-->
+    <!--默认的bean name = ch2.SgtPeppers#0 -->
+    <bean class="ch2.SgtPeppers"/>
+
+    <!--case2-2:需要引用的化，最好给bean设置id，方便引用-->
+    <bean id = "compactDisc" class="ch2.SgtPeppers"/>
+
+    <bean id="compactDisc2" class="ch2.BlankDisc">
+        <constructor-arg value="wzm"/>
+        <constructor-arg value="haha"/>
+    </bean>
+
+    <!--case3:构造器注入bean引用-->
+    <bean id="cdPlayer" class="ch2.CDPlayer">
+        <constructor-arg ref="compactDisc"/>
+    </bean>
+
+    <!--case3-1:c命名空间-->
+    <bean id="cdPlayer1" class="ch2.CDPlayer" c:cd-ref="compactDisc"/>
+    <!--case3-1-2-->
+    <bean id="cdPlayer2" class="ch2.CDPlayer" c:_0-ref="compactDisc"/>
+
+    <!-- 3-2: 设值注入-->
+    <bean id="cdPlayer3" class="ch2.CDPlayer">
+        <property name="cd" ref="compactDisc"/>
+    </bean>
+
+    <!-- 3-3: p命名空间-->
+    <bean id="cdPlayer4" class="ch2.CDPlayer" p:cd-ref="compactDisc"/>
+
+    <!--case 4 :装配集合,无论在哪种情况下，set 和list都可以用来装配list，set甚至数组-->
+    <bean id="compactDisc3" class="ch2.BlankDisk2">
+        <constructor-arg value="www"/>
+        <constructor-arg value="haha"/>
+        <constructor-arg>
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>4</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--4-1: 值注入，装配集合-->
+    <bean id="compactDisc4" class="ch2.BlankDisk2">
+        <property name="artist" value="wzm"/>
+        <property name="title" value="haha"/>
+        <property name="tracks">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>4</value>
+                <value>5</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--4-2: 使用util-list: 将list放在外面 -->
+    <util:list id = "trackList">
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+    </util:list>
+
+    <bean id="compactDisc5" class="ch2.BlankDisk2"
+        p:title="wzm"
+        p:artist="haha"
+        p:tracks-ref="trackList"/>
+
+
+
 
 </beans>
