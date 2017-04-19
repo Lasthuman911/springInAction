@@ -7,8 +7,8 @@
         <!-- 实体类,简称 -设置别名 -->
         <typeAlias alias="Durable" type="com.model.Durable"></typeAlias>
     </typeAliases>
-    <!--environment 元素体中包含了事务管理和连接池的配置-->
-<!--    <environments default="development">
+    <!--environment 元素体中包含了事务管理和连接池的配置,DurableTest中，若没有和spring整合需要用到这个配置 -->
+    <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -18,7 +18,7 @@
                 <property name="password" value="trulymestst"/>
             </dataSource>
         </environment>
-    </environments>-->
+    </environments>
     <!--mappers 元素则是包含一组 mapper 映射器（这些 mapper 的 XML 文件包含了 SQL 代码和映射定义信息）-->
     <mappers>
         <mapper resource="com/model/Durable.xml"/>

@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-
+<!--mybatis 与 spring 的整合-->
     <!--1. 数据源-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
@@ -27,7 +27,7 @@
         <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
         <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象-->
-        <property name="mapperInterface" value="com.model.Idurable.IdurableOperation" />
+        <property name="mapperInterface" value="com.model.Idurable.IdurableOperation"/>
     </bean>
 
 

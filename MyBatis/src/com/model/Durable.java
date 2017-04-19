@@ -9,9 +9,9 @@ import java.sql.Timestamp;
 /**
  * Created by admin on 2017/2/14.
  */
-public class Durable extends UdfAccessor implements DataInfo<DurableKey>
+public class Durable extends UdfAccessor //implements DataInfo<DurableKey>
 {
-    private DurableKey	key;
+//    private DurableKey	key;
 
     public String getDurableName() {
         return durableName;
@@ -77,15 +77,15 @@ public class Durable extends UdfAccessor implements DataInfo<DurableKey>
     {
     }
 
-    public DurableKey getKey()
-    {
-        return this.key;
-    }
-
-    public void setKey(DurableKey key)
-    {
-        this.key = key;
-    }
+//    public DurableKey getKey()
+//    {
+//        return this.key;
+//    }
+//
+//    public void setKey(DurableKey key)
+//    {
+//        this.key = key;
+//    }
 
     public String getDurableType()
     {

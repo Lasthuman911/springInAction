@@ -22,5 +22,7 @@ public class MybatisSprintTest {
 
         System.out.println(durable.getDurableType());
 
+        mapper.deleteDurable("LingTest");
+
     }
 }

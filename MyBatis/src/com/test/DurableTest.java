@@ -45,9 +45,9 @@ public class DurableTest {
         } finally {
             session.close();
         }*/
-           // addDurable();
+           addDurable();
 
-            updateDurable();
+//            updateDurable();
     }
 
     public static void addDurable(){
