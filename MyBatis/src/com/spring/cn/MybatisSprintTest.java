@@ -7,20 +7,20 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by admin on 2017/2/14.
-                */
-        public class MybatisSprintTest {
-            private static ApplicationContext ctx;
+ */
+public class MybatisSprintTest {
+    private static ApplicationContext ctx;
 
-            static {
-                ctx = new ClassPathXmlApplicationContext("com/spring/config/applicationContext.xml");
-            }
+    static {
+        ctx = new ClassPathXmlApplicationContext("com/spring/config/applicationContext.xml");
+    }
 
-            public static void main(String[] args){
-                IdurableOperation mapper = (IdurableOperation) ctx.getBean("userMapper");
+    public static void main(String[] args) {
+        IdurableOperation mapper = (IdurableOperation) ctx.getBean("userMapper");
 
-                Durable durable = mapper.selectDurableByDurableName("LLList");
+        Durable durable = mapper.selectDurableByDurableName("S400A0369");
 
-                System.out.println(durable.getDurableType());
+        System.out.println(durable.getDurableType());
 
     }
 }

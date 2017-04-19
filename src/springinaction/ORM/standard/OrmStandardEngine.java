@@ -68,8 +68,8 @@ public class OrmStandardEngine<KEY extends KeyInfo, DATA extends DataInfo> imple
                 if (queryType.equalsIgnoreCase("delete"))
                     resultSize = update(sql,OrmStandardEngineUtil.getSelectOrDeleteBindObjects(dataObject),ObjectUtil.getString(OrmStandardEngineUtil.getKeyInfo(dataObject)));
                 else if (queryType.equalsIgnoreCase("update"))
-                    resultSize = update(sql,,ObjectUtil.getString(OrmStandardEngineUtil.getKeyInfo(dataObject)));
-                else if (queryType.equalsIgnoreCase("insert"))
+//                    resultSize = update(sql,ObjectUtil.getString(OrmStandardEngineUtil.getKeyInfo(dataObject)));
+//                else if (queryType.equalsIgnoreCase("insert"))
                     ;
                 else
                 {
@@ -85,7 +85,7 @@ public class OrmStandardEngine<KEY extends KeyInfo, DATA extends DataInfo> imple
         {
 
         }
-        return ;
+        return null;
     }
 
     private int update(String sql, Object[] args, String  keyString) throws nanoFrameDBErrorSignal{

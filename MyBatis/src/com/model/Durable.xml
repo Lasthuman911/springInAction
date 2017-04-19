@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+        <!--namespace必须与对应的接口全类名一致-->
 <mapper namespace="com.model.Idurable.IdurableOperation">
     <select id="selectDurableByDurableName" parameterType="String" resultType="Durable">
     select * from durable where durablename = #{durablename}
-</select>
+    </select>
 
     <resultMap id="resultListDurable" type="Durable">
         <id column="durableSpecName" property="durableSpecName"/>
@@ -13,6 +13,7 @@
         <result column="timeUsedLimit" property="timeUsedLimit"/>
     </resultMap>
 
+    <!--id必须与对应接口的某个对应的方法名一致即必须要和IdurableOperation.java接口中的方法同名-->
     <select id="selectDurables" parameterType="String" resultMap="resultListDurable">
         select * from durable where durablename like #{durablename}
     </select>
@@ -28,7 +29,6 @@
     <delete id="deleteDurable" parameterType="String">
         delete from durable where durableName = #{durableName}
     </delete>
-
 
 
 </mapper>

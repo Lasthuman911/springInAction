@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+        <!-- 实体类,简称 -设置别名 -->
         <typeAlias alias="Durable" type="com.model.Durable"></typeAlias>
     </typeAliases>
-
-    <environments default="development">
+    <!--environment 元素体中包含了事务管理和连接池的配置-->
+<!--    <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -17,22 +18,9 @@
                 <property name="password" value="trulymestst"/>
             </dataSource>
         </environment>
-    </environments>
+    </environments>-->
+    <!--mappers 元素则是包含一组 mapper 映射器（这些 mapper 的 XML 文件包含了 SQL 代码和映射定义信息）-->
     <mappers>
         <mapper resource="com/model/Durable.xml"/>
     </mappers>
-<!--    <settings>
-        &lt;!&ndash; Globally enables or disables any caches configured in any mapper under this configuration &ndash;&gt;
-        <setting name="cacheEnabled" value="true"/>
-        &lt;!&ndash; Sets the number of seconds the driver will wait for a response from the database &ndash;&gt;
-        <setting name="defaultStatementTimeout" value="3000"/>
-        &lt;!&ndash; Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn &ndash;&gt;
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-        &lt;!&ndash; Allows JDBC support for generated keys. A compatible driver is required.
-        This setting forces generated keys to be used if set to true,
-         as some drivers deny compatibility but still work &ndash;&gt;
-        <setting name="useGeneratedKeys" value="true"/>
-    </settings>-->
-    <!-- Continue going here -->
-
 </configuration>
